@@ -6,11 +6,9 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get('token')?.value
 
   if (!token) {
-    const cookieExpireInSeconds = 60 * 60 * 24 * 30
-
     return NextResponse.redirect(signInURL, {
       headers: {
-        'Set-Cookie': `redirectTo=${request.url}; Path=/; max-age=${cookieExpireInSeconds}`,
+        'Set-Cookie': `redirectTo=${request.url}; Path=/; HttpOnly; max-age=20`,
       },
     })
   }
